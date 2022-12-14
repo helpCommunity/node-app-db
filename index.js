@@ -27,11 +27,11 @@ app.get('/api', (req,res) => {
 
 // FILE DOWNLOAD ENDPOINTS
 app.get('/api/download/extension', (req,res) => {
-    res.download('/home/ec2-user/simple-db-express-node-server/files/TolokaTracer.zip');
+    res.download('/home/ec2-user/node-app-db/files/TolokaTracer.zip');
 });
 
 app.get('/api/download/form', (req,res) => {
-    res.download('/home/ec2-user/simple-db-express-node-server/files/Consent_Form_PluginTrack.pdf');
+    res.download('/home/ec2-user/node-app-db/files/Consent_Form_PluginTrack.pdf');
 });
 
 // LOG ENDPOINTS
@@ -128,7 +128,7 @@ app.post('/api/assignments/', async (req,res) => {
     res.status(201).send(assignment);
 });
 
-function validateLog(log) 
+function validateLog(log)
 {
     const schema = Joi.object({
         uid: Joi.string().required(),
@@ -162,18 +162,18 @@ function validateTask(task)
         title: Joi.string().required(),
         description: Joi.string().allow('').required(),
         pool_startedAt: Joi.date().iso().required(),
-        hasInstructions: Joi.boolean().required(), 
-        mayContainAdultContent: Joi.boolean().required(), 
-        requesterID: Joi.string().max(50).required(), 
-        requesterTrusted: Joi.boolean().required(), 
+        hasInstructions: Joi.boolean().required(),
+        mayContainAdultContent: Joi.boolean().required(),
+        requesterID: Joi.string().max(50).required(),
+        requesterTrusted: Joi.boolean().required(),
 
-        lang: Joi.string().min(2).max(2).allow(null), 
-        averageAcceptanceTimeSec: Joi.number().allow(null), 
-        grade: Joi.number().allow(null), 
-        moneyAvgHourly: Joi.number().allow(null), 
-        moneyMax3: Joi.number().allow(null), 
-        moneyTop10: Joi.number().allow(null), 
-        moneyMed: Joi.number().allow(null), 
+        lang: Joi.string().min(2).max(2).allow(null),
+        averageAcceptanceTimeSec: Joi.number().allow(null),
+        grade: Joi.number().allow(null),
+        moneyAvgHourly: Joi.number().allow(null),
+        moneyMax3: Joi.number().allow(null),
+        moneyTop10: Joi.number().allow(null),
+        moneyMed: Joi.number().allow(null),
         reward: Joi.number().min(0).required()
     });
 
@@ -225,7 +225,6 @@ app.listen(port, () => {
 
 // Provide the private and public key to the server by reading each file’s content with the readFileSync() method.
 https.createServer({
-    key: fs.readFileSync("/home/ec2-user/simple-db-express-node-server/private.key"),
-    cert: fs.readFileSync("/home/ec2-user/simple-db-express-node-server/certificate.crt"),
+    key: fs.readFileSync("/home/ec2-user/node-app-db/private.key"),
+    cert: fs.readFileSync("/home/ec2-user/node-app-db/certificate.crt"),
 }, app).listen(port, () => { console.log(`Listening on port ${port}...`); });
-
